@@ -1,0 +1,114 @@
+.lightgreen-action-bar {
+  background-color: #6ABA19;
+  color: #fff
+  
+}
+
+.darkgreen-action-bar {
+  background-color: #218721;
+  color: #fff
+}
+
+
+
+.ubd-title {
+  font-size: 22;
+  color: #fff;
+}
+
+.ubd-subtitle {
+  font-weight: bold;
+  color: rgba(255, 252, 252, 0.603);
+  margin-top: 2;
+  margin-bottom: 2;
+}
+
+.ubd-title-container {
+  background-image: url("https://t3.ftcdn.net/jpg/03/17/96/38/360_F_317963860_oeZPAwG8ffXYEpspiEcVgNxDvBs1VcY9.jpg"); 
+  background-repeat: no-repeat;
+  width: 100%;
+  padding-left: 16;
+  padding-right: 16;
+  padding-top: 16;
+}
+
+.ubd-filter-margins{
+  margin-left: 6;
+  margin-right: 6;
+  margin-top: 5;
+  padding: 10;
+
+  background-color: #fff;
+  
+  border: 3px solid #bfcabc;
+  border-radius: 5;
+  box-shadow:  -2px 2px #bfcabc,
+        2px #bfcabc,
+       3px #bfcabc,
+       4px #bfcabc,
+        5px #bfcabc;
+}
+
+.box-shadow{
+  border: 3px solid #DBECDA;
+  border-radius: 1;
+  box-shadow:  5px -5px #DBECDA,
+        2px #DBECDA,
+       3px #DBECDA,
+       4px #DBECDA,
+        5px #DBECDA;
+}
+
+
+
+
+/* ~~~~~~~~~~~~~~
+Ripple Effect
+~~~~~~~~~~~~~~ */
+
+.ripple {
+  width: 2px;
+  height: 2px;
+  position: auto;
+  border-radius: 25%;
+  color: rgb(0, 0, 0);
+  background-color:#d2f1d23d;
+  animation: rippleEffect 0.3s ease-in-out;
+}
+
+@keyframes rippleEffect {
+  0% {
+    opacity: 1;
+    transform: scale(50,50);
+  }
+
+  25% {
+      opacity: 1;
+      transform: scale(25,25);
+    }
+
+  50% {
+    opacity: 1;
+    transform: scale(50,50);
+  }
+  
+  75% {
+      opacity: 1;
+      transform: scale(70,70);
+    } 
+
+  100% {
+    opacity: 0;
+    transform: scale(0,0);
+  }
+
+
+  
+  
+    
+  
+    
+}
+
+
+/* #DBECDA pista green background */ 

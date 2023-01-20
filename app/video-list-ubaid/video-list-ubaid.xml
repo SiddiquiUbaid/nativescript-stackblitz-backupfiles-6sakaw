@@ -1,0 +1,135 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" 
+    xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" unloaded="onUnloaded" 
+    xmlns:Card="nativescript-cardview" 
+    xmlns:lv="nativescript-ui-listview" style.background-color="#FAFAFA" 
+    xmlns:ui="nativescript-cfalert-dialog" 
+    xmlns:PullRefresh="@nstudio/nativescript-pulltorefresh" 
+    xmlns:nativescript-image="nativescript-image">
+
+  <ActionBar title="Session Recordings" class="lightgreen-action-bar" automationText="ActionBar" >
+    <NavigationButton icon="res://ic_back" tap="goBack" automationText="GoBack" />  
+  </ActionBar>
+
+  <GridLayout rows="auto, auto, *" backgroundColor="rgb(219, 236, 218)">
+
+    <StackLayout  row="0" class="ubd-title-container">
+      <Label  text="{{ subject }}" class="ubd-title" textWrap="true" />
+      <Label text="{{ totalVideos }}" class="ubd-subtitle" textWrap="true" />
+    </StackLayout>
+
+     <GridLayout row="1" rows="auto, auto" columns="*, auto" class="ubd-filter-margins">
+      <Label text="Filter videos" row="0" style.fontSize="16" textWrap="true" />
+      <Label text="All videos" row="1" textWrap="true" />
+      <Label text="&#xf0b0;"  textWrap="true" col="1" rowSpan="2" style.fontSize="18" verticalAlignment="center" class="fas" />
+    </GridLayout>
+
+    <!-- <GridLayout row="2" rows="*">
+      <GridLayout row="0" class="page-content" visibility="{{no_data_recordings}}" backgroundColor="#FAFAFA">
+      <Label class="page-icon icon" text="&#xf01d;"/>
+      <Label class="page-placeholder" text="No Recordings"/>
+    </GridLayout>
+    </GridLayout>
+    
+
+    <GridLayout rows="auto,auto,auto" height="100%" verticalAlignment="center" horizontalAlignment="center" row="0" class="page-content p-5" visibility="{{no_internet_label_recordings}}" backgroundColor="#FAFAFA">
+        <Label row="0" class="page-icon fa" text="&#xf021;"/>
+        <Label row="1" marginTop="50" class="page-placeholder" textWrap="true" text="It seems you're not connected to the Internet - we can't find any network!"/>
+        <Button row="2" marginTop="100" width="50%" backgroundColor="#d2232a" class="btn btn-rounded-sm btn-primary" text="Reload" color="white" tap="reloadRecordings"/>
+    </GridLayout> -->
+
+    <!-- <GridLayout row="2" rows="*">
+    <lv:RadListView items="{{ dataItems }}" >
+        <lv:RadListView.itemTemplate>
+            <StackLayout orientation="vertical">
+                <Label fontSize="20" text="itemName"/>
+                <Label fontSize="14" text="itemDescription"/>
+            </StackLayout>
+        </lv:RadListView.itemTemplate>
+    </lv:RadListView>
+    </GridLayout> -->
+
+    <GridLayout row="2" rows="*">
+      <android>
+        <lv:RadListView row="0" id="todo-list" items="{{ videolList }}" class="list-group" selectionBehavior="Press" multipleSelection="false"  >
+
+          <lv:RadListView.listViewLayout>
+              <lv:ListViewLinearLayout itemAddAnimation="Fade" itemRemoveAnimation="Fade"/>
+              </lv:RadListView.listViewLayout>
+
+              <lv:RadListView.itemTemplate>
+                <StackLayout marginBottom="4" >
+                  <Card:CardView class="cardStyle" background-color="#fff" margin="10dp" elevation="10" radius="15">
+                    <GridLayout  rows="auto, auto, auto"  columns="*, *, *" padding="10"  >
+
+                    <StackLayout row="0" col="0" colSpan="3" class="box-shadow">
+
+                      <nativescript-image:Img  stretch="aspectFit" width="100%" src="{{thumbnailUrl}}"  /> 
+                      </StackLayout>
+                      <Label text="&#xf01d;"  row="0" colSpan="3" verticalAlignment="center" horizontalAlignment="center"  class="icon" style.color="#218721" style.fontSize="50"/>
+                     
+                      <GridLayout  tap="showSubjectDetails" row="1" rows="auto, auto" columns="*, *, *"  colSpan="3"   >
+
+                      <Card:CardView  class="darkgreen-action-bar" row="0"   colSpan="3"  margin="3dp" marginTop="10dp" marginBottom="15" elevation="10" radius="15">
+                      <GridLayout  tap="changeArrowIcon" rows="auto" columns="*, auto"   colSpan="3" >
+                      <Label  row="0" col="0" paddingBottom="8dp" paddingLeft="15dp"  paddingTop="8dp"  style.fontSize="20"  text="{{fileName}}"  textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
+                      <Label  visibility="visible" id="lblArrow" col="1" text="&#xf078;" margin="10"  class="icon" style.color="#fff" style.fontSize="20" verticalAlignment="center"  textWrap="true" /> 
+                      </GridLayout>
+                      </Card:CardView>
+
+                      <GridLayout  visibility="collapse"  id="subjectDetailsGrid"  row="1" colSpan="3" rows="auto, auto, auto, auto, auto, auto, auto"  columns="*, *, *" paddingBottom="8dp" paddingLeft="15dp">
+                      <label  paddingRight="16dp" paddingBottom="8dp" paddingLeft="16dp" style.color="#000000DE" class="ubd-subtitle"  text="Description: " row="1" col="0" colSpan="3" textWrap="true"/>
+                      <label  id="lblDescription" text="{{description}}" paddingRight="16dp" paddingBottom="8dp"  style.color="#000000DE"  row="1" col="1" colSpan="3" textWrap="true"/>
+                      
+                      <label paddingRight="16dp" paddingBottom="8dp" paddingLeft="16dp" style.color="#000000DE" class="ubd-subtitle"  text="Cycle: " row="2" col="0" colSpan="3" textWrap="true"/>
+                      <label paddingRight="16dp" paddingBottom="8dp" colSpan="3" style.color="#000000DE" text="{{  month + ' ' + year}}" row="2" col="1" textWrap="true" />
+
+                      <label paddingRight="16dp" paddingBottom="8dp" paddingLeft="16dp" style.color="#000000DE" class="ubd-subtitle"  text="Added: " row="3" col="0" colSpan="3" textWrap="true"/>
+                      <label paddingRight="16dp"  paddingBottom="8dp" colSpan="3" style.color="#000000DE" text="{{addedOn}}" row="3" col="1" textWrap="true"/>
+
+                      <label paddingRight="16dp" paddingBottom="8dp" paddingLeft="16dp" paddingTop="-3dp" style.color="#000000DE" class="ubd-subtitle"  text="Track/Group: " row="4" col="0" colSpan="3" textWrap="true"/>
+                      <label paddingRight="16dp"  paddingBottom="8dp" colSpan="3" style.color="#000000DE" text="{{ '' + track}}"  row="4" col="1" textWrap="true"/>
+
+                      <label paddingRight="16dp" paddingBottom="8dp" paddingLeft="16dp" style.color="#000000DE" class="ubd-subtitle"  text="Faculty: " row="5" col="0" colSpan="3" textWrap="true"/>
+                      <label paddingRight="16dp"  paddingBottom="8dp" colSpan="3" style.color="#000000DE" text="{{ '' + facultyName}}"  row="5" col="1" textWrap="true" />
+
+                      
+                      </GridLayout>
+                      </GridLayout>
+                      
+                      <Label tap="rippleOnTouch" text="&#xf2ce;" row="2" col="0" class="icon" style.color="#218721" style.fontSize="24" verticalAlignment="center" horizontalAlignment="center" textWrap="true"/>
+                      <button tap="rippleOnTouch" text="Explore"  row="2" col="1" color="#218721"  />
+                      <button tap="rippleOnTouch" text="Download" row="2" col="2" color="#218721"   />
+                    </GridLayout>
+                  </Card:CardView>
+                </StackLayout>
+              </lv:RadListView.itemTemplate>
+        
+        </lv:RadListView>
+      </android>
+    </GridLayout>
+
+
+    
+
+
+
+   
+   
+    
+  
+  
+  
+  
+    
+    
+
+
+  
+
+
+
+</GridLayout>
+    
+  
+
+</Page>
