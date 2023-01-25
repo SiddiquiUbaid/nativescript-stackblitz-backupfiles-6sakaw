@@ -1,0 +1,118 @@
+.profile-picture {
+  border-width: 1;
+  border-color: #c40f0f;
+  width: 80;
+  height: 80;
+  border-radius: 50;
+  margin-top: 5;
+  vertical-align: top;
+  horizontal-align: center;
+  transform: scale(0.8, 0.8);
+  animation-name: picture;
+  animation-duration: 0.3;
+  opacity: 0;
+  animation-delay: 0.7;
+  animation-fill-mode: forwards
+}
+
+@keyframes picture {
+  from {
+      opacity: 0;
+      transform: scale(2, 2);
+      animation-timing-function: ease-in
+  }
+  to {
+      opacity: 1;
+      transform: scale(1, 1)
+  }
+}
+
+.dashboard-style {
+  background-color: #FFFFFF;
+  margin-top: 0;
+  margin-left: 3;
+  margin-right: 3;
+
+  border-radius: 2;
+  /* box-shadow:  3px 3px 3px 3px #8d9093a8; */
+        
+
+  border-bottom-right-radius: 50;
+}
+
+.content-leaf-style-ltr {
+  background-color: #d32c40;
+  margin: 10;
+  color: white;
+  border-radius: 2;
+  box-shadow: 7px 7px 7px 7px #8d9093a8;
+        
+
+  border-top-left-radius: 40;
+  border-bottom-right-radius: 40;
+}
+
+.content-leaf-style-rtl {
+  background-color:  #d32c40;
+  margin: 10;
+  color: white;
+  border-radius: 2;
+  box-shadow:  7px 7px 7px 7px #8d9093a8;
+  
+        
+  border-top-right-radius: 40;
+  border-bottom-left-radius: 40;
+}
+
+.content-leaf-style-ltr-pressed {
+  background-color:  white;
+  color: #d32c40;
+  
+  margin: 10;
+
+  box-shadow: 1px 1px 1px 1px #8d9093a8;
+
+  border-radius: 40 0 40 0;
+ 
+ 
+ 
+ 
+}
+
+.content-leaf-style-rtl-pressed {
+  background-color:  white;
+  color: #d32c40;
+  margin: 10;
+  box-shadow: 1px 1px 1px 1px #8d9093a8;
+  border-radius: 0 40 0 40;
+  
+ 
+}
+
+.content-leaf-style-bg {
+  background-color: white;
+  box-shadow:  0px 0px 5px  hsl(210, 3%, 56%);
+  
+  border-top-left-radius: 50;
+  border-top-right-radius: 0;
+  
+}
+
+.sapid-label {
+  background-color: #d2232a;
+  color: white;
+  padding: 2;
+
+  border-bottom-right-radius: 5;
+}
+
+.notification-counter-bg {
+  background-color:  green;
+  color: white;
+  
+ 
+  border-radius: 50 50 50 0;
+  
+ 
+}
+

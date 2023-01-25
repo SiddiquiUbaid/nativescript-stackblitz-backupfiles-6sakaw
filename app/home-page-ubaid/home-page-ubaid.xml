@@ -1,0 +1,110 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" class="page" 
+    xmlns:Card="nativescript-cardview" 
+    xmlns:FAB="nativescript-floatingactionbutton" 
+    xmlns:lv="nativescript-ui-listview" loaded="onDashboardTabLoaded">
+
+    <ActionBar class="action-bar" automationText="ActionBar" title="NGASCE">
+
+        <NavigationButton icon="res://menu" tap="onDrawerButtonTap" automationText="SidebarMenu"/>
+
+        
+        <ActionItem id="exampleMenuButton" icon="res://ic_notifications_none_white_24dp" view="views/notifications/notifications" automationText="ExampleMenu" tap="goToNotificaton" firebase_key="ngasce_notification_list"/>
+
+    </ActionBar>
+
+    <GridLayout rows="*" >
+
+      <GridLayout row="0" rows="auto, *">
+        <GridLayout row="0" rows="auto, auto" backgroundImage="res://dashboard_bg_red_white_ngasce" class="dashboard-style">
+
+        <GridLayout row="0" rows="auto, auto" columns="auto, *">
+          <Image  col="0" row="0" class="profile-picture" rowSpan="2" margin="15" horizontalAlignment="center" backgroundColor="white"  width="100" height="100" src="https://www.premiumgraduate.com.au/wp-content/uploads/2020/06/good-linkedin-profile-photo-right-expression-1000x1000.jpg"  />
+          
+          <StackLayout row="0" col="1" marginTop="15"  marginBottom="5"  > 
+          <Label  text="Ubaid Siddiqui" color="black" horizontalAlignment="left"  fontSize="16px;" fontFamily="Ubuntu, serif"  paddingTop="10"  paddingRight="10"  />
+          <Label  text="MSc. CS" horizontalAlignment="left"  fontSize="14px;" fontFamily="Ubuntu, serif" color="#AA4A44"  paddingBottom="10" paddingRight="10"  />
+          <Label class="p-2 h6 icon"  text="&#xf003;  ubdsiddiqui404@gmail.com" fontSize="12px;" color="black" />
+          <Label class="p-2 h6 icon"  text="&#xf095;  9892321234" fontSize="12px;" color="black" />
+          </StackLayout>
+
+          <Card:CardView row="1" col="0" colSpan="2" radius="7" elevation="25"  verticalAlignment="center" horizontalAlignment="center" marginBottom="10" >
+          <Label  row="1" col="0" color="white"  text="SAP ID: 77999999999   |    VALIDITY ENDS: 20-Jan-2024" fontSize="12px;" backgroundColor="green" colSpan="2" padding="3"  />
+          </Card:CardView>
+
+          </GridLayout>
+
+
+        </GridLayout>
+        
+
+        
+      <GridLayout row="1" rows="*, *, *" columns="*, *" width="100%" height="100%"  class="content-leaf-style-bg" marginLeft="5" >
+
+        <!-- calendar -->
+        <GridLayout rows="*, auto" columns="*, auto"  row="0" col="0"   class="content-leaf-style-ltr" tap="onItemPressed" >
+          <!-- <Image  row="0"   src="res://new_calendar_icon1" width="120" height="120" verticalAlignment="center" horizontalAlignment="center" />  -->
+          <Label  row="0" colSpan="2" class="icon" text="&#xf272;"  fontSize="75" verticalAlignment="center" horizontalAlignment="center" />  
+          <Label  row="1" colSpan="2"  text="Academic Calendar"  fontSize="14"  verticalAlignment="center" horizontalAlignment="center" textWrap="true"  marginBottom="20" />  
+          <StackLayout row="0" col="1" orientation="horizontal" width="auto" height="30" verticalAlignment="top" marginTop="7" marginRight="25" >
+            <Label  padding="5"   color="white" backgroundColor="green"  text="999"  fontSize="12"  style.fontWeight="bold" class="notification-counter-bg" />
+          </StackLayout>
+        </GridLayout>
+
+         <!-- message -->
+        <GridLayout rows="*, auto" columns="*, auto"  row="0" col="1"   class="content-leaf-style-rtl" tap="onItemPressed" >
+           <Label  row="0" colSpan="2" class="icon" text="&#xf0e0;"  fontSize="75" verticalAlignment="center" horizontalAlignment="center" /> 
+           <Label  row="1"  colSpan="2" text="Inbox"  fontSize="16"  verticalAlignment="center" horizontalAlignment="center" textWrap="true"  marginBottom="20" /> 
+           <StackLayout row="0" col="1" orientation="horizontal" width="auto" height="30" verticalAlignment="top" marginTop="7" marginRight="20" >
+            <Label  padding="5"   color="white" backgroundColor="green"  text="999" fontSize="12"  style.fontWeight="bold" class="notification-counter-bg" />
+           </StackLayout>
+        </GridLayout>
+
+          <!-- play -->
+         <GridLayout rows="*, auto" columns="*, auto"  row="1" col="0"  class="content-leaf-style-rtl" tap="onItemPressed" >
+          <Label  row="0" colSpan="2" class="icon" text="&#xf144;"  fontSize="75" verticalAlignment="center" horizontalAlignment="center" />
+          <Label  row="1" colSpan="2"  text="Session Recordings"  fontSize="14"  verticalAlignment="center" horizontalAlignment="center" textWrap="true"  marginBottom="20" />    
+          <StackLayout row="0" col="1" orientation="horizontal" width="auto" height="30" verticalAlignment="top" marginTop="7" marginRight="30" >
+            <Label  padding="5"   color="white" backgroundColor="green"  text="999"  fontSize="12"  style.fontWeight="bold" class="notification-counter-bg" />
+          </StackLayout> 
+        </GridLayout>
+
+         <!-- download -->
+        <GridLayout rows="*, auto" columns="*, auto"  row="1" col="1"   class="content-leaf-style-ltr" tap="onItemPressed" >
+         <Label  row="0" colSpan="2" class="icon" text="&#xf019;"  fontSize="75" verticalAlignment="center" horizontalAlignment="center" />   
+         <Label  row="1" colSpan="2"  text="Downloads"  fontSize="14"   verticalAlignment="center" horizontalAlignment="center" textWrap="true"  marginBottom="20" /> 
+         <StackLayout row="0" col="1" orientation="horizontal" width="auto" height="30" verticalAlignment="top" marginTop="7" marginRight="33" >
+          <Label  padding="5"   color="white" backgroundColor="green"  text="999"  fontSize="12"  style.fontWeight="bold" class="notification-counter-bg" />
+         </StackLayout>
+        </GridLayout>
+
+         <!-- exams -->
+         <GridLayout rows="*, auto" columns="*, *"  row="2" col="0"    class="content-leaf-style-ltr" tap="onItemPressed" >
+          <Label  row="0" colSpan="2" class="icon" text="&#xf15c;"  fontSize="75" verticalAlignment="center" horizontalAlignment="center" /> 
+           <Label  row="1"  colSpan="2" text="Exams"  fontSize="14"  verticalAlignment="center" horizontalAlignment="center" textWrap="true"  marginBottom="20" /> 
+           
+        </GridLayout>
+
+         <!-- support -->
+        <GridLayout rows="*, auto" columns="*, *"  row="2" col="1"    class="content-leaf-style-rtl" tap="onItemPressed" >
+          <Label  row="0" colSpan="2" class="icon" text="&#xf059;"  fontSize="75" verticalAlignment="center" horizontalAlignment="center" />  
+           <Label  row="1"  colSpan="2" text="Support"  fontSize="14"   verticalAlignment="center" horizontalAlignment="center" textWrap="true"  marginBottom="20" />  
+        </GridLayout>
+      
+      
+
+      
+         
+      
+        
+     
+     
+      </GridLayout>
+
+      </GridLayout>
+
+    
+    </GridLayout>
+
+
+
+ </Page>
