@@ -1,0 +1,178 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" class="page" 
+    xmlns:Card="nativescript-cardview" 
+    xmlns:FAB="nativescript-floatingactionbutton" 
+    xmlns:lv="nativescript-ui-listview" loaded="onDashboardTabLoaded">
+
+    <ActionBar class="action-bar" automationText="ActionBar" title="NGASCE">
+
+        <NavigationButton icon="res://menu" tap="onDrawerButtonTap" automationText="SidebarMenu"/>
+
+        
+        <ActionItem id="exampleMenuButton" icon="res://ic_notifications_none_white_24dp" view="views/notifications/notifications" automationText="ExampleMenu" tap="goToNotificaton" firebase_key="ngasce_notification_list"/>
+
+    </ActionBar>
+
+    <GridLayout rows="*"  backgroundColor="#ebebeb">
+
+      <GridLayout row="0" rows="auto, auto, auto, auto">
+        <GridLayout row="0" rows="auto, auto" backgroundImage="res://dashboard_bg_red_white_ngasce" class="dashboard-style" >
+
+        <GridLayout row="0" rows="auto, auto" columns="auto, *">
+          <Image  col="0" row="0" class="profile-picture" rowSpan="2" margin="15" horizontalAlignment="center" backgroundColor="white"  width="100" height="100" src="https://www.premiumgraduate.com.au/wp-content/uploads/2020/06/good-linkedin-profile-photo-right-expression-1000x1000.jpg"  />
+          
+          <StackLayout row="0" col="1" marginTop="15"  marginBottom="5"  > 
+          <Label  text="Ubaid Siddiqui" color="black" horizontalAlignment="left"  fontSize="16px;" fontFamily="Ubuntu, serif"  paddingTop="10"  paddingRight="10"  />
+          <Label  text="MSc. CS" horizontalAlignment="left"  fontSize="14px;" fontFamily="Ubuntu, serif" color="#AA4A44"  paddingBottom="10" paddingRight="10"  />
+          <Label class="p-2 h6 icon"  text="&#xf003;  ubdsiddiqui404@gmail.com" fontSize="12px;" color="black" />
+          <Label class="p-2 h6 icon"  text="&#xf095;  9892321234" fontSize="12px;" color="black" />
+          </StackLayout>
+
+          <Card:CardView row="1" col="0" colSpan="2" radius="7" elevation="25"  verticalAlignment="center" horizontalAlignment="center" marginBottom="10" >
+          <Label  row="1" col="0" color="white"  text="SAP ID: 77999999999   |    VALIDITY ENDS: 20-Jan-2024" fontSize="12px;" backgroundColor="#d2232a" colSpan="2" padding="3"  />
+          </Card:CardView>
+
+          </GridLayout>
+
+
+        </GridLayout>
+
+
+        <!-- Upcoming sessions label-->
+        <GridLayout rows="*" columns="*, auto"  row="1" marginTop="5" marginLeft="3" marginRight="3" backgroundColor="white" marginBottom="1">  
+           <Label  row="0" col="0" text="UPCOMING SESSIONS" color="black"  fontSize="16" verticalAlignment="center"   marginRight="5" padding="5"  /> 
+           <Label  row="0"  col="1" text="see more"  fontSize="16" fontWeight="bold" color="#d2232a" verticalAlignment="center" horizontalAlignment="center" textWrap="true"  textAlignment="center" padding="5" marginRight="5" />  
+        </GridLayout>
+
+
+         <!-- Upcoming sessions contents-->
+         <ScrollView row="2" orientation="horizontal" backgroundColor="white" marginBottom="3">
+         <StackLayout  orientation="horizontal"  >
+        <GridLayout  rows="auto, auto, auto, auto, auto" columns="*, *"  class="content-leaf-style-rtl-pressed" horizontalAlignment="left" width="280" height="auto"  >
+    
+            <Label   row="0" colSpan="2" text="Orientation 4 - Retail Jan 2023 Cycle" class="card-title-bg" fontSize="18"    textWrap="true"    padding="5"  paddingLeft="10" />
+            <Label   row="1" colSpan="2"  text="Orientation"  fontSize="16"  color="#d2232a" fontWeight="bold" verticalAlignment="center" textAlignment="left" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="2" colSpan="2"  text="&#xf2bd; :  NGASCE Faculty" class="icon" fontSize="14"  color="black" verticalAlignment="center"  textWrap="true"   padding="5" marginLeft="14"/>  
+            <Label   row="3"   text="&#xf073; :  Tue, Jan 31st 2023" class="icon" fontSize="14"  color="black" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="3" col="1"  text="&#xf017; :  5:00 PM" class="icon" fontSize="14"  color="black" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="4" col="0" class="content-leaf-style-rtl-pressed" text="EXPLORE"  fontSize="14"  color="#d2232a" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="8" marginTop="5"/>  
+             <Label   row="4" col="1" class="content-leaf-style-rtl-pressed" text="REMIND ME"  fontSize="14"  color="#d2232a" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="8" marginTop="5"/>  
+         
+        </GridLayout>
+
+        <GridLayout  rows="auto, auto, auto, auto, auto" columns="*, *"  class="content-leaf-style-rtl-pressed" horizontalAlignment="left" width="280" height="auto">
+    
+            <Label   row="0" colSpan="2" text="Orientation 4 - Retail Jan 2023 Cycle" class="card-title-bg" fontSize="18"    textWrap="true"    padding="5"  paddingLeft="10" />
+            <Label   row="1" colSpan="2"  text="Orientation"  fontSize="16"  color="#d2232a" fontWeight="bold" verticalAlignment="center" textAlignment="left" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="2" colSpan="2"  text="&#xf2bd; :  NGASCE Faculty" class="icon" fontSize="14"  color="black" verticalAlignment="center"  textWrap="true"   padding="5" marginLeft="14"/>  
+            <Label   row="3"   text="&#xf073; :  Tue, Jan 31st 2023" class="icon" fontSize="14"  color="black" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="3" col="1"  text="&#xf017; :  5:00 PM" class="icon" fontSize="14"  color="black" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="4" col="0" class="content-leaf-style-rtl-pressed" text="EXPLORE"  fontSize="14"  color="#d2232a" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="8" marginTop="5"/>  
+             <Label   row="4" col="1" class="content-leaf-style-rtl-pressed" text="REMIND ME"  fontSize="14"  color="#d2232a" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="8" marginTop="5"/>  
+         
+        </GridLayout>
+
+        <GridLayout  rows="auto, auto, auto, auto, auto" columns="*, *"  class="content-leaf-style-rtl-pressed" horizontalAlignment="left" width="280" height="auto">
+    
+            <Label   row="0" colSpan="2" text="Orientation 4 - Retail Jan 2023 Cycle" class="card-title-bg" fontSize="18"    textWrap="true"    padding="5"  paddingLeft="10" />
+            <Label   row="1" colSpan="2"  text="Orientation"  fontSize="16"  color="#d2232a" fontWeight="bold" verticalAlignment="center" textAlignment="left" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="2" colSpan="2"  text="&#xf2bd; :  NGASCE Faculty" class="icon" fontSize="14"  color="black" verticalAlignment="center"  textWrap="true"   padding="5" marginLeft="14"/>  
+            <Label   row="3"   text="&#xf073; :  Tue, Jan 31st 2023" class="icon" fontSize="14"  color="black" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="3" col="1"  text="&#xf017; :  5:00 PM" class="icon" fontSize="14"  color="black" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="4" col="0" class="content-leaf-style-rtl-pressed" text="EXPLORE"  fontSize="14"  color="#d2232a" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="8" marginTop="5"/>  
+             <Label   row="4" col="1" class="content-leaf-style-rtl-pressed" text="REMIND ME"  fontSize="14"  color="#d2232a" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="8" marginTop="5"/>  
+         
+        </GridLayout>
+
+        <GridLayout  rows="auto, auto, auto, auto, auto" columns="*, *"  class="content-leaf-style-rtl-pressed" horizontalAlignment="left" width="280" height="auto">
+    
+            <Label   row="0" colSpan="2" text="Orientation 4 - Retail Jan 2023 Cycle" class="card-title-bg" fontSize="18"    textWrap="true"    padding="5"  paddingLeft="10" />
+            <Label   row="1" colSpan="2"  text="Orientation"  fontSize="16"  color="#d2232a" fontWeight="bold" verticalAlignment="center" textAlignment="left" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="2" colSpan="2"  text="&#xf2bd; :  NGASCE Faculty" class="icon" fontSize="14"  color="black" verticalAlignment="center"  textWrap="true"   padding="5" marginLeft="14"/>  
+            <Label   row="3"   text="&#xf073; :  Tue, Jan 31st 2023" class="icon" fontSize="14"  color="black" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="3" col="1"  text="&#xf017; :  5:00 PM" class="icon" fontSize="14"  color="black" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="5" marginLeft="10"/>  
+            <Label   row="4" col="0" class="content-leaf-style-rtl-pressed" text="EXPLORE"  fontSize="14"  color="#d2232a" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="8" marginTop="5"/>  
+             <Label   row="4" col="1" class="content-leaf-style-rtl-pressed" text="REMIND ME"  fontSize="14"  color="#d2232a" verticalAlignment="center" textAlignment="center" textWrap="true"   padding="8" marginTop="5"/>  
+         
+        </GridLayout>
+
+
+        </StackLayout>
+        </ScrollView>
+
+         <!-- contents section -->
+      <GridLayout row="3" rows="auto, auto" columns="*, *, *"   backgroundColor="white" >
+
+        <!-- calendar -->
+        <GridLayout rows="*, auto" columns="*, auto"  row="0" col="0"  color="#d2232a" tap="onItemPressed"  class="content-leaf-style-rtl-pressed"  >
+         
+            <Label   row="0" colSpan="2" text="&#xf272;"  fontSize="30"   class="icon" verticalAlignment="center" horizontalAlignment="center" marginTop="5" />
+            <Label   row="1" colSpan="2"  text="Academic Calendar"  fontSize="14"  verticalAlignment="center" horizontalAlignment="center" textWrap="true"  textAlignment="center" padding="5" />  
+         
+         
+           
+       
+           <!--  <StackLayout row="0" col="1" orientation="horizontal" width="auto" height="30" verticalAlignment="top" >
+            <Label  padding="5"   color="white"   text="0"  fontSize="12"  style.fontWeight="bold" class="notification-counter-bg" />
+          </StackLayout> -->
+        </GridLayout>
+
+         <!-- message -->
+        <GridLayout rows="*, auto" columns="*, auto"  row="0" col="1"  color="#d2232a"  tap="onItemPressed" class="content-leaf-style-rtl-pressed">
+         
+           <Label  row="0" colSpan="2" class="icon" text="&#xf0e0;" color="#d2232a"  fontSize="30" verticalAlignment="center" horizontalAlignment="center" marginTop="5"  /> 
+        
+           <Label  row="1"  colSpan="2" text="Inbox"  fontSize="16"  verticalAlignment="center" horizontalAlignment="center" textWrap="true"  textAlignment="center" padding="5"  /> 
+          <!--  <StackLayout row="0" col="1" orientation="horizontal" width="auto" height="30" verticalAlignment="top" marginTop="7" marginRight="30" >
+            <Label  padding="5"   color="white" text="99+" fontSize="12"  style.fontWeight="bold" class="notification-counter-bg" />
+           </StackLayout> -->
+        </GridLayout>
+
+          <!-- play -->
+         <GridLayout rows="*, auto" columns="*, auto"  row="0" color="#d2232a" col="2"  tap="onItemPressed" class="content-leaf-style-rtl-pressed" >
+          <Label  row="0" colSpan="2" class="icon" text="&#xf144;"  fontSize="30" verticalAlignment="center" horizontalAlignment="center" marginTop="5" />
+         <Label  row="1" colSpan="2"  text="Session Recordings"  fontSize="14"  verticalAlignment="center" horizontalAlignment="center" textWrap="true" textAlignment="center" padding="5"  />    
+          <!--  <StackLayout row="0" col="1" orientation="horizontal" width="auto" height="30" verticalAlignment="top" marginTop="7" marginRight="40" >
+            <Label  padding="5"   color="white"   text="99+"  fontSize="12"  style.fontWeight="bold" class="notification-counter-bg" />
+          </StackLayout>  -->
+        </GridLayout>
+
+         <!-- download -->
+        <GridLayout rows="*, auto" columns="*, auto"  row="1" col="0"  color="#d2232a"  tap="onItemPressed"  class="content-leaf-style-rtl-pressed" >
+         <Label  row="0" colSpan="2" class="icon" text="&#xf019;"  fontSize="30" verticalAlignment="center" horizontalAlignment="center" marginTop="5" />   
+         <Label  row="1" colSpan="2"  text="Downloads"  fontSize="14"   verticalAlignment="center" horizontalAlignment="center" textWrap="true"  textAlignment="center" padding="5"  /> 
+         <!-- <StackLayout row="0" col="1" orientation="horizontal" width="auto" height="30" verticalAlignment="top" marginTop="7" marginRight="42" >
+          <Label  padding="5"   color="white"   text="0"  fontSize="12"  style.fontWeight="bold" class="notification-counter-bg" />
+         </StackLayout> -->
+        </GridLayout>
+
+         <!-- exams -->
+         <GridLayout rows="*, auto" columns="*, *"  row="1" col="1"  color="#d2232a"  tap="onItemPressed" class="content-leaf-style-rtl-pressed" >
+          <Label  row="0" colSpan="2" class="icon" text="&#xf15c;"  fontSize="30" verticalAlignment="center" horizontalAlignment="center" marginTop="5" /> 
+           <Label  row="1"  colSpan="2" text="Exams"  fontSize="14"  verticalAlignment="center" horizontalAlignment="center" textWrap="true"  textAlignment="center" padding="5"  /> 
+           
+        </GridLayout>
+
+         <!-- support -->
+        <GridLayout rows="*, auto" columns="*, *"  row="1" col="2"  color="#d2232a" tap="onItemPressed" class="content-leaf-style-rtl-pressed"  >
+          <Label  row="0" colSpan="2" class="icon" text="&#xf059;"  fontSize="30" verticalAlignment="center" horizontalAlignment="center" marginTop="5" />  
+           <Label  row="1"  colSpan="2" text="Support"  fontSize="14"   verticalAlignment="center" horizontalAlignment="center" textWrap="true"  textAlignment="center" padding="5"  />  
+        </GridLayout>
+      
+      
+
+      
+         
+      
+        
+     
+     
+      </GridLayout>
+
+      </GridLayout>
+
+    
+    </GridLayout>
+
+
+
+ </Page>
