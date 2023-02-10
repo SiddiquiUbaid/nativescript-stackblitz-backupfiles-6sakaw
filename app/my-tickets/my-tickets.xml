@@ -1,0 +1,364 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" class="page" backgroundSpanUnderStatusBar="true" 
+    xmlns:Card="nativescript-cardview"
+    xmlns:FAB="nativescript-floatingactionbutton" 
+    xmlns:PullRefresh="@nstudio/nativescript-pulltorefresh"
+    xmlns:lv="nativescript-ui-listview" backgroundColor="#F5F5F5" loaded="pageLoaded" unloaded="onUnloaded">
+    <Page.actionBar>
+        <ActionBar automationText="ActionBar" id="actionTitle" title="My Tickets" class="action-bar">
+            <NavigationButton icon="res://ic_back" tap="goBack" automationText="GoBack" />
+        </ActionBar>
+    </Page.actionBar>
+    
+
+ <GridLayout rows="*">
+    
+    <TabView row="0" class="tab-view" android:SelectedTabHighlightColor="#d2232a" >
+        <TabViewItem title="Open">
+
+        <GridLayout height="100%" rows="auto, *" loaded="openTicketLoaded" style="background-color:rgb(245,245,245)">
+        
+            <GridLayout visibility="{{openTicketsSearchBarVisibility}}" backgroundColor="#FAFAFA"  row="0" height="50" class="card" padding="0 10 0 0"   >
+                <SearchBar row="0" id="searchBarOpenTickets"  hint="Enter a keyword to search" class="input input-border" marginTop="3" marginBottom="2" />
+            </GridLayout>
+            <GridLayout rows="auto,auto" row="1" class="page-content" visibility="{{ no_data1 }}" backgroundColor="#FAFAFA">
+                <Label row="0" class="page-icon icon" text="&#xf044;"></Label>
+                <Label row="1" class="page-placeholder" text="No Tickets to Show"/>
+            </GridLayout>
+            <GridLayout row="1" rows="auto,auto,auto" class="page-content p-10" visibility="{{ no_internet1 }}" backgroundColor="#FAFAFA">
+                <Label row="0" HorizontalAlignment="center" class="page-icon icon" text="&#xf021;"/>
+                <Label row="1" HorizontalAlignment="center" class="page-placeholder" textWrap="true" text="It seems you're not connected to the Internet - we can't find any network!"/>
+                <Button row="2" width="50%" HorizontalAlignment="center" marginTop="40%" backgroundColor="#d2232a" class="btn btn-rounded-sm btn-primary" text="Reload" color="white" row="2" tap="reloadOpenTickets"/>
+            </GridLayout>
+            <GridLayout row="1" rows="auto,auto,auto" class="page-content p-5" visibility="{{ serverdown1 }}" backgroundColor="#FAFAFA">
+                <Label row="0" HorizontalAlignment="center" class="page-icon fa" text="&#xf021;"/>
+                <Label row="1" HorizontalAlignment="center" class="page-placeholder" textWrap="true" text="Oops! We are Sorry Something went wrong. We're working on it now"/>
+                <Button row="2" HorizontalAlignment="center" width="50%" marginTop="40%" backgroundColor="#d2232a" class="btn btn-rounded-sm btn-primary" text="Reload" color="white" row="2" tap="reloadOpenTickets"/>
+            </GridLayout>
+
+                <GridLayout row="1" rows="auto, *" loaded="openTicketLoaded" visibility="{{ data1 }}" tap="onPageTapped" >
+                    
+                    
+                    <android>
+                        <lv:RadListView row="1" items="{{ studentMyTicketsOpenList }}"   class="list-group" pullToRefresh="true" pullToRefreshInitiated="pullToRefreshOpenTickets" backgroundColor="white" >
+                            <lv:RadListView.listViewLayout>
+                                <lv:ListViewLinearLayout itemAddAnimation="Fade" itemRemoveAnimation="Fade"/>
+                            </lv:RadListView.listViewLayout>
+                            <lv:RadListView.itemTemplate>
+                                <StackLayout paddingBottom="0.2">
+                                    <Card:CardView class="cardStyle" backgroundColor="white" margin="6dp" elevation="10" radius="15" height="auto">
+                                        <GridLayout rows="auto,auto, auto, auto, auto" columns="*, *" class="page-content" backgroundColor="#FAFAFA">
+                                            <StackLayout row="0" colSpan="2"  margin="5" marginLeft="15">
+                                                <Label fontSize="16" fontWeight="bold"  color="black" textWrap="true" text="{{ subject }}"></Label>
+                                            
+                                            </StackLayout>
+
+                                            <StackLayout row="1" colSpan="2"  margin="3" horizontalAlignment="center" class="hr-light m-3"></StackLayout>
+
+                                            <StackLayout row="2" col="0" margin="5" marginLeft="15" >
+                                                <Label  fontSize="14"    text="Ticket No. "></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ ticketNo }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="2" col="1" margin="5">
+                                                <Label  fontSize="14"    text="In Progress Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ inProgressDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="3" col="0" margin="5"  marginLeft="15">
+                                                <Label  fontSize="14"    text="Open Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ openDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="3" col="1" margin="5">
+                                                <Label  fontSize="14"    text="Expected Close Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ expectedCloseDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="4" col="0" margin="5" padding="5"  verticalAlignment="center">
+                                                <Label fontSize="15" fontWeight="bold" marginLeft="8" verticalAlignment="center"   color="green"  text="{{ requestStatus }}"></Label>
+                                            </StackLayout>
+
+                                    
+                                            <Card:CardView elevation="2" row="4" col="1" radius="8" width="100" backgroundColor="{{ isEscalate? 'white' : '#d2232a' }}"   verticalAlignment="center" marginBottom="5"  marginTop="5" paddingLeft="5" paddingRight="5" > 
+                                                <Label fontSize="14" padding="5"  horizontalAlignment="center" verticalAlignment="center" textAlignment="center" fontWeight="bold" color="{{ isEscalate? '' : 'white' }}" text="{{ isEscalate? 'Escalated' : 'Escalate' }}"  />
+                                            </Card:CardView>
+                                
+
+                                        </GridLayout> 
+                                    </Card:CardView >    
+                                </StackLayout> 
+                            </lv:RadListView.itemTemplate>
+                        </lv:RadListView>
+                    </android>
+
+                    <ios>
+                        <PullRefresh:PullToRefresh row="1" refresh="pullToRefreshOpenTickets">
+                            <ListView row="0" items="{{ studentMyTicketsOpenList }}" itemLoading="onItemLoading" class="list-group" backgroundColor="white">
+                                <ListView.itemTemplate>
+                                    <StackLayout paddingBottom="0.2">
+                                        <GridLayout rows="auto,auto, auto, auto, auto" columns="*, *" class="page-content" backgroundColor="#FAFAFA">
+                                            <StackLayout row="0" colSpan="2"  margin="5" marginLeft="15">
+                                                <Label fontSize="16" fontWeight="bold"  color="black" textWrap="true" text="{{ subject }}"></Label> 
+                                            </StackLayout>
+
+                                            <StackLayout row="1" colSpan="2"  margin="3" horizontalAlignment="center" class="hr-light m-3"></StackLayout>
+
+                                            <StackLayout row="2" col="0" margin="5" marginLeft="15" >
+                                                <Label  fontSize="14"    text="Ticket No. "></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ ticketNo }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="2" col="1" margin="5">
+                                                <Label  fontSize="14"    text="In Progress Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ inProgressDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="3" col="0" margin="5"  marginLeft="15">
+                                                <Label  fontSize="14"    text="Open Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ openDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="3" col="1" margin="5">
+                                                <Label  fontSize="14"    text="Expected Close Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ expectedCloseDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="4" col="0" margin="5" padding="5"  verticalAlignment="center">
+                                                <Label fontSize="15" fontWeight="bold" marginLeft="8" verticalAlignment="center"   color="green"  text="{{ requestStatus }}"></Label>
+                                            </StackLayout>
+                                        </GridLayout>
+                                    </StackLayout>
+                                </ListView.itemTemplate>
+                            </ListView>
+                        </PullRefresh:PullToRefresh>
+                    </ios>
+                </GridLayout>
+
+                 <ActivityIndicator row="1" busy="{{ openTickets_isLoading }}" verticalAlignment="center" horizontalAlignment="center" />
+
+                </GridLayout>
+  
+        </TabViewItem>
+
+        <TabViewItem title="Closed">
+
+            <GridLayout height="100%" rows="auto, *" loaded="closedTicketsLoaded" style="background-color:rgb(245,245,245)">
+        
+                <GridLayout visibility="{{closedTicketsSearchBarVisibility}}" backgroundColor="#FAFAFA"  row="0" height="50" class="card" padding="0 10 0 0"   >
+                     <SearchBar row="0" id="searchBarClosedTickets" hint="Enter a keyword to search" class="input input-border" marginTop="3" marginBottom="2" />
+
+                </GridLayout>
+                <GridLayout rows="auto,auto" row="1" class="page-content" visibility="{{ no_data2 }}" backgroundColor="#FAFAFA">
+                    <Label row="0" class="page-icon icon" text="&#xf044;"></Label>
+                    <Label row="1" class="page-placeholder" text="No Tickets to Show"/>
+                </GridLayout>
+                <GridLayout row="1" rows="auto,auto,auto" class="page-content p-10" visibility="{{ no_internet2 }}" backgroundColor="#FAFAFA">
+                    <Label row="0" HorizontalAlignment="center" class="page-icon icon" text="&#xf021;"/>
+                    <Label row="1" HorizontalAlignment="center" class="page-placeholder" textWrap="true" text="It seems you're not connected to the Internet - we can't find any network!"/>
+                    <Button row="2" width="50%" HorizontalAlignment="center" marginTop="40%" backgroundColor="#d2232a" class="btn btn-rounded-sm btn-primary" text="Reload" color="white" row="2" tap="reloadClosedTickets"/>
+                </GridLayout>
+                <GridLayout row="1" rows="auto,auto,auto" class="page-content p-5" visibility="{{ serverdown2 }}" backgroundColor="#FAFAFA">
+                    <Label row="0" HorizontalAlignment="center" class="page-icon fa" text="&#xf021;"/>
+                    <Label row="1" HorizontalAlignment="center" class="page-placeholder" textWrap="true" text="Oops! We are Sorry Something went wrong. We're working on it now"/>
+                    <Button row="2" HorizontalAlignment="center" width="50%" marginTop="40%" backgroundColor="#d2232a" class="btn btn-rounded-sm btn-primary" text="Reload" color="white" row="2" tap="reloadClosedTickets"/>
+                </GridLayout>
+           
+                <GridLayout row="1" rows="auto, *" loaded="closedTicketsLoaded" visibility="{{ data2 }}">
+
+                   
+                    <android>
+                        <lv:RadListView row="1" items="{{ studentMyTicketsClosedList }}"   class="list-group" pullToRefresh="true" pullToRefreshInitiated="pullToRefreshClosedTickets" backgroundColor="white">
+                            <lv:RadListView.listViewLayout>
+                                <lv:ListViewLinearLayout itemAddAnimation="Fade" itemRemoveAnimation="Fade"/>
+                            </lv:RadListView.listViewLayout>
+                            <lv:RadListView.itemTemplate>
+                                <StackLayout paddingBottom="0.2">
+                                    <Card:CardView class="cardStyle" backgroundColor="white" margin="6dp" elevation="10" radius="15" height="auto">
+                                        <GridLayout rows="auto,auto, auto, auto, auto" columns="*, *" class="page-content" backgroundColor="#FAFAFA">
+                                            <StackLayout row="0" colSpan="2"  margin="5" marginLeft="15">
+                                                <Label fontSize="16" fontWeight="bold"  color="black" textWrap="true" text="{{ subject }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="1" colSpan="2"  margin="3" horizontalAlignment="center" class="hr-light m-3"></StackLayout>
+
+                                            <StackLayout row="2" col="0" margin="5" marginLeft="15" >
+                                                <Label  fontSize="14"    text="Ticket No. "></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ ticketNo }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="2" col="1" margin="5">
+                                                <Label  fontSize="14"    text="Status"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black" color="{{  statusColor }}" text="{{ requestStatus }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="3" col="0" margin="5"  marginLeft="15">
+                                                <Label  fontSize="14"    text="Open Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ openDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="3" col="1" margin="5">
+                                                <Label  fontSize="14"    text="Close Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ closeDate }}"></Label>
+                                            </StackLayout>
+
+                                            <!-- <StackLayout row="4" col="0" margin="5" padding="5"  verticalAlignment="center">
+                                                <Label fontSize="15"  marginLeft="8" verticalAlignment="center"     text="Status"></Label>
+                                            </StackLayout> -->
+
+                                            <!-- <StackLayout row="4" col="1" margin="5" padding="5"  verticalAlignment="center">
+                                                <Label fontSize="15" fontWeight="bold" marginLeft="8" verticalAlignment="center"   color="{{  statusColor }}"  text="{{ requestStatus }}"></Label>
+                                            </StackLayout> -->
+                                        </GridLayout> 
+                                    </Card:CardView >    
+                                </StackLayout> 
+                            </lv:RadListView.itemTemplate>
+                        </lv:RadListView>
+                    </android>
+
+                    <ios>
+                        <PullRefresh:PullToRefresh row="1" refresh="pullToRefreshClosedTickets">
+                            <ListView row="0" items="{{ studentMyTicketsClosedList }}" itemLoading="onItemLoading" class="list-group" backgroundColor="white">
+                                <ListView.itemTemplate>
+                                    <StackLayout paddingBottom="0.2">
+                                        <GridLayout rows="auto,auto, auto, auto, auto" columns="*, *" class="page-content" backgroundColor="#FAFAFA">
+                                            <StackLayout row="0" colSpan="2"  margin="5" marginLeft="15">
+                                                <Label fontSize="16" fontWeight="bold"  color="black" textWrap="true" text="{{ subject }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="1" colSpan="2"  margin="3" horizontalAlignment="center" class="hr-light m-3"></StackLayout>
+
+                                            <StackLayout row="2" col="0" margin="5" marginLeft="15" >
+                                                <Label  fontSize="14"    text="Ticket No. "></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ ticketNo }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="2" col="1" margin="5">
+                                                <Label  fontSize="14"    text="In Progress Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ inProgressDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="3" col="0" margin="5"  marginLeft="15">
+                                                <Label  fontSize="14"    text="Open Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ openDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="3" col="1" margin="5">
+                                                <Label  fontSize="14"    text="Expected Close Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ expectedCloseDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="4" col="0" margin="5" padding="5"  verticalAlignment="center">
+                                                <Label fontSize="15"  marginLeft="8" verticalAlignment="center"     text="Status"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="4" col="1" margin="5" padding="5"  verticalAlignment="center">
+                                                <Label fontSize="15" fontWeight="bold" marginLeft="8" verticalAlignment="center"   color="{{  statusColor }}"  text="{{ requestStatus }}"></Label>
+                                            </StackLayout>
+                                        </GridLayout> 
+                                    </StackLayout>
+                                </ListView.itemTemplate>
+                            </ListView>
+                        </PullRefresh:PullToRefresh>
+                    </ios>
+                </GridLayout>
+
+                <ActivityIndicator row="1" busy="{{ closedTickets_isLoading }}" verticalAlignment="center" horizontalAlignment="center" />
+
+            </GridLayout>
+            
+        </TabViewItem>
+
+        <TabViewItem title="Feedback">
+
+            <GridLayout height="100%" rows="*" loaded="feedbacksTicketLoaded" style="background-color:rgb(245,245,245)">
+        
+                <GridLayout rows="auto,auto" row="0" class="page-content" visibility="{{ no_data3 }}" backgroundColor="#FAFAFA">
+                    <Label row="0" class="page-icon icon" text="&#xf044;"></Label>
+                    <Label row="1" class="page-placeholder" text="No Tickets to Show"/>
+                </GridLayout>
+                <GridLayout row="0" rows="auto,auto,auto" class="page-content p-10" visibility="{{ no_internet3 }}" backgroundColor="#FAFAFA">
+                    <Label row="0" HorizontalAlignment="center" class="page-icon icon" text="&#xf021;"/>
+                    <Label row="1" HorizontalAlignment="center" class="page-placeholder" textWrap="true" text="It seems you're not connected to the Internet - we can't find any network!"/>
+                    <Button row="2" width="50%" HorizontalAlignment="center" marginTop="40%" backgroundColor="#d2232a" class="btn btn-rounded-sm btn-primary" text="Reload" color="white" row="2" tap="reloadTicketsFeedback"/>
+                </GridLayout>
+                <GridLayout row="0" rows="auto,auto,auto" class="page-content p-5" visibility="{{ serverdown3 }}" backgroundColor="#FAFAFA">
+                    <Label row="0" HorizontalAlignment="center" class="page-icon fa" text="&#xf021;"/>
+                    <Label row="1" HorizontalAlignment="center" class="page-placeholder" textWrap="true" text="Oops! We are Sorry Something went wrong. We're working on it now"/>
+                    <Button row="2" HorizontalAlignment="center" width="50%" marginTop="40%" backgroundColor="#d2232a" class="btn btn-rounded-sm btn-primary" text="Reload" color="white" row="2" tap="reloadTicketsFeedback"/>
+                </GridLayout>
+           
+            
+                <GridLayout  rows="auto, *" loaded="feedbacksTicketLoaded" visibility="{{ data3 }}">
+                    <SearchBar row="0" id="searchBarFeedbacksTickets" hint="Enter a keyword to search" class="input input-border" marginTop="3" marginBottom="2" />
+
+                    <android>
+                        <lv:RadListView row="1" items="{{ ticketsFeedbacksList }}"   class="list-group"   pullToRefresh="true" pullToRefreshInitiated="pullToRefreshfeedbacksTickets" backgroundColor="white" >
+                            <lv:RadListView.listViewLayout>
+                                <lv:ListViewLinearLayout itemAddAnimation="Fade" itemRemoveAnimation="Fade"/>
+                            </lv:RadListView.listViewLayout>
+                            <lv:RadListView.itemTemplate>
+                                <StackLayout paddingBottom="0.2">
+                                    <Card:CardView class="cardStyle" backgroundColor="white" margin="6dp" elevation="10" radius="15" height="auto">
+                                        <GridLayout rows="auto, auto, auto" columns="*, *" class="page-content" backgroundColor="#FAFAFA">
+                                            <StackLayout row="0" colSpan="2"  margin="5" marginLeft="15">
+                                                <Label fontSize="16"   color="black" textWrap="true" text="{{ subject }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="1" colSpan="2"  margin="3" horizontalAlignment="center" class="hr-light m-3"></StackLayout>
+
+                                            <StackLayout row="2" col="0" margin="5"  marginLeft="15" horizontalAlignment="center" marginTop="10" >
+                                                <Label  fontSize="14"    text="Open Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ openDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="2" col="1" margin="5"  marginLeft="15" horizontalAlignment="center" marginTop="10"  >
+                                                <Label  fontSize="14"    text="Status"></Label>
+                                                <Label fontSize="15" fontWeight="bold" verticalAlignment="center"   color="{{  statusColor }}"  text="{{ requestStatus }}"></Label>
+                                            </StackLayout>
+                                        </GridLayout> 
+                                    </Card:CardView >    
+                                </StackLayout> 
+                            </lv:RadListView.itemTemplate>
+                        </lv:RadListView>
+                    </android>
+
+                    <ios>
+                        <PullRefresh:PullToRefresh row="1" refresh="pullToRefreshfeedbacksTickets">
+                            <ListView row="0" items="{{ ticketsFeedbacksList }}" itemLoading="onItemLoading" class="list-group" backgroundColor="white">
+                                <ListView.itemTemplate>
+                                    <StackLayout paddingBottom="0.2">
+                                        <GridLayout rows="auto, auto, auto" columns="*, *" class="page-content" backgroundColor="#FAFAFA">
+                                            <StackLayout row="0" colSpan="2"  margin="5" marginLeft="15">
+                                                <Label fontSize="16"   color="black" textWrap="true" text="{{ subject }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="1" colSpan="2"  margin="3" horizontalAlignment="center" class="hr-light m-3"></StackLayout>
+
+                                            <StackLayout row="2" col="0" margin="5"  marginLeft="15" horizontalAlignment="center" marginTop="10" >
+                                                <Label  fontSize="14"    text="Open Date"></Label>
+                                                <Label fontSize="15" fontWeight="bold" color="black"  text="{{ openDate }}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout row="2" col="1" margin="5"  marginLeft="15" horizontalAlignment="center" marginTop="10"  >
+                                                <Label  fontSize="14"    text="Status"></Label>
+                                                <Label fontSize="15" fontWeight="bold" verticalAlignment="center"   color="{{  statusColor }}"  text="{{ requestStatus }}"></Label>
+                                            </StackLayout>
+                                        </GridLayout>
+                                    </StackLayout>
+                                </ListView.itemTemplate>
+                            </ListView>
+                        </PullRefresh:PullToRefresh>
+                    </ios>
+
+                    
+                </GridLayout>
+                <ActivityIndicator row="0" busy="{{ feedbackTickets_isLoading }}" verticalAlignment="center" horizontalAlignment="center" />
+
+            </GridLayout>  
+        </TabViewItem>
+    </TabView>
+
+    <FAB:fab  tap="reload" marginBottom="10" marginRight="10"  backgroundColor="#d2232a" tap="raiseATicket" width="50" height="50" verticalAlignment="bottom" style.fontSize="8" text="&#xf067;"  rippleColor="#f1f1f1" class="fab-button icon" />
+    
+</GridLayout>
+</Page>  
